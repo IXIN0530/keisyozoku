@@ -106,6 +106,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     setSubAndPoint([...subAndPoint, { id: a, points: pointValue }]);//登録されたすべての強化データへ送る。
     setPointValue("");
   }
+
   return (
     <>
       <p>科目選択と点数登録</p>
