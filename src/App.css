@@ -36,3 +36,72 @@
     transform: rotate(360deg);
   }
 }
+.Title{
+  font-weight: bold;
+  font-size: large;
+}
+.p_inline{
+  display: inline;
+  background-color: rgb(161, 211, 255);
+  padding: 10px;
+}
+button{
+  cursor: pointer;
+  margin: 5px;
+  border: none;
+
+  
+}
+select{
+  display: block;
+  margin: 10px auto;
+}
+.point{
+  display: inline;
+}
+.resister_button{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  border-radius: 15px;
+  width: 80px;
+  margin: 0 20px;
+  padding: 15px;
+  background-color: rgb(255, 120, 53);
+  border: solid 1px rgb(210, 96, 43);
+}
+.resister_button:hover{
+  transition: ease-in-out 0.2s;
+  box-shadow: 0 5px 10px gray;
+  background-color: rgb(255, 134, 82);
+}
+input{
+  text-align: center;
+  height:50px;
+  width: 100px;
+  font-size: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 4px gray;
+  border: none;
+}
+.sen{
+  border-radius: 5px;
+  background-color: rgb(183, 214, 255);
+  box-shadow: 0 1px 1px gray;
+}
+.hi{
+  border-radius: 5px;
+  background-color: rgb(255, 153, 153);
+  box-shadow: 0 1px 1px gray;
+}
+.Form{
+  padding: 10px;
+  margin: 0 auto;
+  background-color: rgb(238, 237, 237);
+  border-radius: 20px;
+  width: 80%;
+  box-shadow: 0 1px 1px gray;
+  border: solid 1px rgb(160, 160, 160);
+}
+
