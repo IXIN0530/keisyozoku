@@ -66,6 +66,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     "生命科学基礎1Q",
     "生命科学基礎2Q",
   ];
+  const [senorhi, setSenOrHi] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
   const [nowSubject, setNowSubject] = useState(senSubject);
   //ボタンのカスタマイズ
   const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
@@ -84,11 +85,13 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
       setBorderBottom1("rgb(0, 185, 0)  solid");
       setBorderBottom2("none");
       setNowSubject(senSubject);
+      setSenOrHi("rgb(183, 214, 255)") //選択科目が選択されている
     }
     else {
       setBorderBottom1("none");
       setBorderBottom2("rgb(0, 185, 0)  solid");
       setNowSubject(hiSubject);
+      setSenOrHi("rgb(255, 153, 153)"); //必須科目が選択されている
     }
   }
   //登録ボタンが押された時の処理
@@ -103,9 +106,29 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    setSubAndPoint([...subAndPoint, { id: a, points: pointValue }]);//登録されたすべての強化データへ送る。
+    ChangeColor(pointValue);
+    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, senorhi: senorhi, color: pointColor }]);//登録されたすべての強化データへ送る。
     setPointValue("");
   }
+  const ChangeColor = (e) => {
+    if (e < 60) {
+      setPointColor("rgb(180, 180, 164)");
+    }
+    else if (e < 80) {
+      setPointColor("white");
+    }
+    else if (e < 90) {
+      setPointColor("rgb(142, 255, 232)");
+    }
+    else if (e < 95) {
+      setPointColor("rgb(115, 230, 136)");
+    }
+    else if (e <= 100) {
+      setPointColor("rgb(63, 255, 19)");
+    }
+  }
+  //点数の色
+  const [pointColor, setPointColor] = useState("");
 
   return (
     <>

@@ -118,22 +118,43 @@ input {
 }
 
 .subject {
-  text-align: left;
   display: inline-block;
+  width: 70%;
+  margin: 0;
   padding: 10px;
-  background-color: aqua;
-  border: solid black 1px;
+  border-right: solid black 1px;
+  height: 100%;
 }
 
 .display_point {
   display: inline-block;
-  padding-top: 12.9px;
-  padding-bottom: 12px;
-  padding-left: 10px;
-  background-color: rgb(180, 180, 164);
+  padding-top: 12.4px;
+  padding-bottom: 13px;
+  background-color: rgb(167, 180, 164);
   margin: auto 0;
+  border-right: 1px solid black;
+  width: 100px;
 }
 
 .subandpoint {
+  height: 100%;
+  display: flex;
+  background-color: bisque;
+  border-bottom: solid 1px black;
+}
+
+.List {
+  border: 1px solid black;
+  border-bottom: none;
+  width: 90%;
+  margin: 10px auto;
+  max-width: 900px;
+}
+
+.delete_button {
+  height: 30px;
   margin: 0 auto;
+  right: 0px;
+  height: 44px;
+  width: 150px;
 }
