@@ -100,7 +100,7 @@ const MakeSubject=()=>{
     }
     //登録ボタンが押された時の処理
     const [pointvalue,setPointvalue]=useState("");
-    const [nowpoint,setNowpoint]=useState("");
+    
     const[a,setA]=useState("化学実験第一(2)"); //今選択されている科目
 
     const ChangeSelect=(e)=>{
@@ -115,11 +115,7 @@ const MakeSubject=()=>{
 
     const Resisterform=(e)=>{
         e.preventDefault();
-        setNowpoint({
-            points:pointvalue,
-            id:a
-        });
-        setSubandPoint([...subandpoint,nowpoint]);//登録されたすべての強化データへ送る。
+        setSubandPoint([...subandpoint,{id:a,points:pointvalue}]);//登録されたすべての強化データへ送る。
         setPointvalue("");
     }
 
