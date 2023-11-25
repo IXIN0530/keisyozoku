@@ -7,4 +7,5 @@ const ExportPoints = ({ id, points }) => {
     </div>
   );
 }
+
 export default ExportPoints;
