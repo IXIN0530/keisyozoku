@@ -1,5 +1,6 @@
 import { useState } from "react";
-const MakeSubject = ({ subandpoint, setSubandPoint }) => {
+
+const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   //科目データ
   //選択部分
   const senSubject = [
@@ -65,7 +66,7 @@ const MakeSubject = ({ subandpoint, setSubandPoint }) => {
     "生命科学基礎1Q",
     "生命科学基礎2Q",
   ];
-  const [nowsubject, setNowsubject] = useState(senSubject);
+  const [nowSubject, setNowSubject] = useState(senSubject);
   //ボタンのカスタマイズ
   const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
   const [borderBottom2, setBorderBottom2] = useState("none");
@@ -78,46 +79,45 @@ const MakeSubject = ({ subandpoint, setSubandPoint }) => {
     transition: "ease-in-out 0.3s"
   };
   //参照するときにはtargetという文言が必要
-  const buttonclick = (e) => {
-    if (e.target.className == "sen") {
+  const buttonClick = (e) => {
+    if (e.target.className === "sen") {
       setBorderBottom1("rgb(0, 185, 0)  solid");
       setBorderBottom2("none");
-      setNowsubject(senSubject);
+      setNowSubject(senSubject);
     }
     else {
       setBorderBottom1("none");
       setBorderBottom2("rgb(0, 185, 0)  solid");
-      setNowsubject(hiSubject);
+      setNowSubject(hiSubject);
     }
   }
   //登録ボタンが押された時の処理
-  const [pointvalue, setPointvalue] = useState("");
+  const [pointValue, setPointValue] = useState("");
   const [a, setA] = useState("化学実験第一(2)"); //今選択されている科目
   const ChangeSelect = (e) => {
     console.log(e.target.value);
     setA(e.target.value);
   }
   const ResisterClick = (e) => {
-    setPointvalue(e.target.value);
+    setPointValue(e.target.value);
   }
-  const Resisterform = (e) => {
+  const ResisterForm = (e) => {
     e.preventDefault();
-    setSubandPoint([...subandpoint, { id: a, points: pointvalue }]);//登録されたすべての強化データへ送る。
-    setPointvalue("");
+    setSubAndPoint([...subAndPoint, { id: a, points: pointValue }]);//登録されたすべての強化データへ送る。
+    setPointValue("");
   }
+
   return (
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="sen" style={select_style1} onClick={buttonclick}>選択</button>
-        <button className="hi" style={select_style2} onClick={buttonclick}>必修</button>
-
-
+        <button className="sen" style={select_style1} onClick={buttonClick}>選択</button>
+        <button className="hi" style={select_style2} onClick={buttonClick}>必修</button>
         <select onChange={ChangeSelect} name="Select">
-          {nowsubject.map((item, index) => <option value={item}>{item}</option>)}
+          {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>
-        <form onSubmit={Resisterform} >
-          <input onChange={ResisterClick} className="point" required value={pointvalue} placeholder="入力"></input>
+        <form onSubmit={ResisterForm} >
+          <input onChange={ResisterClick} className="point" required value={pointValue} placeholder="入力"></input>
           <button className="resister_button" >登録</button>
         </form>
       </div>
