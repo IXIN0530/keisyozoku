@@ -1,9 +1,7 @@
 import { useRef, useState } from "react";
 import ExportPoints from './ExportPoints';
-const MakeSubject=()=>{
+const MakeSubject=({subandpoint,setSubandPoint})=>{
     //科目データ
-    const [subandpoint,setSubandPoint]=useState([]);
-
     //選択部分
     const senSubject=[
         "化学実験第一(2)",
@@ -136,10 +134,6 @@ const MakeSubject=()=>{
                     <button className="resister_button" >登録</button>
                 </form>
             </div>
-
-            {subandpoint.length ? subandpoint.map((item,index)=><ExportPoints key={index} id={item.id} points={item.points}/>)
-            :(<p>まだ点数が保存されていません</p>)}
-            <p>{subandpoint.length}</p>
         </>
     );
 }

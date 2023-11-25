@@ -1,10 +1,8 @@
 import { useState } from "react";
-const ExportPoints=({key,id,points})=>{
+const ExportPoints=({id,points})=>{
     
     return(
-        <>
-            <p>{id}は{points}点{key}</p>
-        </>
+        <div className=""></div>
     );
 }
 
