@@ -116,3 +116,14 @@ input {
   box-shadow: 0 1px 1px gray;
   border: solid 1px rgb(160, 160, 160);
 }
+
+.subject {
+  width: 200px;
+  background-color: aqua;
+}
+
+.display_point {
+  display: inline;
+  background-color: rgb(180, 180, 164);
+  margin: auto 0;
+}

@@ -1,8 +1,8 @@
 const ExportPoints = ({ id, points }) => {
   return (
     <div className="">
-      <p style={{ backgroundColor: "goldenrod" }}>{id}:</p>
-      <p style={{ display: "inline", backgroundColor: "gold" }}>{points}</p>
+      <p className="subject">{id}:</p>
+      <p className="display_point">{points}</p>
       <button>削除</button>
     </div>
   );
