@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
-import ExportPoints from './ExportPoints';
-const MakeSubject=({subandpoint,setSubandPoint})=>{
+import { useState } from "react";
+const MakeSubject = ({ subandpoint, setSubandPoint }) => {
     //科目データ
     //選択部分
-    const senSubject=[
+    const senSubject = [
         "化学実験第一(2)",
         "化学実験第二(2)",
         "物理学実験第一",
@@ -44,11 +43,8 @@ const MakeSubject=({subandpoint,setSubandPoint})=>{
         "微分積分学第二(2)",
         "微分積分演習第二",
         "グローバル理工人入門(2)",
-
-
-
     ];
-    const hiSubject=[
+    const hiSubject = [
         "英語第一",
         "英語第二",
         "英語第三",
@@ -69,65 +65,56 @@ const MakeSubject=({subandpoint,setSubandPoint})=>{
         "生命科学基礎1Q",
         "生命科学基礎2Q",
     ];
-    const[nowsubject,setNowsubject]=useState(senSubject);
+    const [nowsubject, setNowsubject] = useState(senSubject);
     //ボタンのカスタマイズ
-    const [borderBottom1,setBorderBottom1]=useState("rgb(0, 185, 0)  solid");
-    const [borderBottom2,setBorderBottom2]=useState("none");
-    const select_style1={
-        borderBottom:borderBottom1,
+    const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
+    const [borderBottom2, setBorderBottom2] = useState("none");
+    const select_style1 = {
+        borderBottom: borderBottom1,
         transition: "ease-in-out 0.3s"
     };
-    const select_style2={
-        borderBottom:borderBottom2,
+    const select_style2 = {
+        borderBottom: borderBottom2,
         transition: "ease-in-out 0.3s"
     };
     //参照するときにはtargetという文言が必要
-    const buttonclick=(e)=>{
-        if(e.target.className=="sen"){
+    const buttonclick = (e) => {
+        if (e.target.className == "sen") {
             setBorderBottom1("rgb(0, 185, 0)  solid");
             setBorderBottom2("none");
-            
             setNowsubject(senSubject);
         }
-        else{
+        else {
             setBorderBottom1("none");
             setBorderBottom2("rgb(0, 185, 0)  solid");
-            
             setNowsubject(hiSubject);
         }
     }
     //登録ボタンが押された時の処理
-    const [pointvalue,setPointvalue]=useState("");
-    
-    const[a,setA]=useState("化学実験第一(2)"); //今選択されている科目
-
-    const ChangeSelect=(e)=>{
+    const [pointvalue, setPointvalue] = useState("");
+    const [a, setA] = useState("化学実験第一(2)"); //今選択されている科目
+    const ChangeSelect = (e) => {
         console.log(e.target.value);
         setA(e.target.value);
     }
-
-    const ResisterClick=(e)=>{
+    const ResisterClick = (e) => {
         setPointvalue(e.target.value);
-        
     }
-
-    const Resisterform=(e)=>{
+    const Resisterform = (e) => {
         e.preventDefault();
-        setSubandPoint([...subandpoint,{id:a,points:pointvalue}]);//登録されたすべての強化データへ送る。
+        setSubandPoint([...subandpoint, { id: a, points: pointvalue }]);//登録されたすべての強化データへ送る。
         setPointvalue("");
     }
-
-   
-    return(
+    return (
         <>
             <p>科目選択と点数登録</p>
             <div className="Form">
-                <button  className="sen" style={select_style1} onClick={buttonclick}>選択</button>
-                <button  className="hi" style={select_style2} onClick={buttonclick}>必修</button>
-                
-                
+                <button className="sen" style={select_style1} onClick={buttonclick}>選択</button>
+                <button className="hi" style={select_style2} onClick={buttonclick}>必修</button>
+
+
                 <select onChange={ChangeSelect} name="Select">
-                    {nowsubject.map((item,index)=><option value={item}>{item}</option>)}
+                    {nowsubject.map((item, index) => <option value={item}>{item}</option>)}
                 </select>
                 <form onSubmit={Resisterform} >
                     <input onChange={ResisterClick} className="point" required value={pointvalue} placeholder="入力"></input>
