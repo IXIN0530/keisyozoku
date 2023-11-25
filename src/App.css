@@ -122,6 +122,7 @@ input {
   display: inline-block;
   padding: 10px;
   background-color: aqua;
+  border: solid black 1px;
 }
 
 .display_point {
@@ -131,4 +132,8 @@ input {
   padding-left: 10px;
   background-color: rgb(180, 180, 164);
   margin: auto 0;
+}
+
+.subandpoint {
+  margin: 0 auto;
 }
