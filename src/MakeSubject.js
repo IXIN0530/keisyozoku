@@ -103,12 +103,13 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   }
   const ResisterClick = (e) => {
     setPointValue(e.target.value);
+    ChangeColor(e.target.value);
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    ChangeColor(pointValue);
     setSubAndPoint([...subAndPoint, { id: a, points: pointValue, senorhi: senorhi, color: pointColor }]);//登録されたすべての強化データへ送る。
     setPointValue("");
+    setPointColor("");
   }
   const ChangeColor = (e) => {
     if (e < 60) {
@@ -126,10 +127,12 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     else if (e <= 100) {
       setPointColor("rgb(63, 255, 19)");
     }
+    else {
+      setPointColor("black");
+    }
   }
   //点数の色
   const [pointColor, setPointColor] = useState("");
-
   return (
     <>
       <p>科目選択と点数登録</p>

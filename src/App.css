@@ -159,3 +159,12 @@ input {
   color: white;
   font-weight: bold;
 }
+
+.calculate_point {
+  background-color: aliceblue;
+}
+
+.sum_point {
+  display: inline-block;
+  background-color: white;
+}
