@@ -7,13 +7,15 @@ const CalculatePoint = ({ subAndPoint, setSubAndPoint }) => {
     let _subAndPoint = [...subAndPoint];
     let sorted_subAndPoint = _subAndPoint.sort((item1, item2) => (item1.points < item2.points) ? 1 : (item1.points > item2.points) ? -1 : 0);
     setSubAndPoint(sorted_subAndPoint);
-    console.log(subAndPoint);
-    subAndPoint.map((item) => { setSumPoint(sumPoint + parseInt(item.points)) });
+    //系所属点数の算出
+    var counter = 0;
+    subAndPoint.map((item) => { counter += parseInt(item.points) });
+    setSumPoint(counter);
   }
   return (
     <div className="calculate_point">
       <p className="sum_point">{sumPoint}</p>
-      <button onClick={Calculate}>計算</button>
+      <button className="calculate_button" onClick={Calculate}>系所属点を計算</button>
     </div>
   )
 }

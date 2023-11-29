@@ -162,9 +162,25 @@ input {
 
 .calculate_point {
   background-color: aliceblue;
+  padding: 10px;
 }
 
 .sum_point {
   display: inline-block;
   background-color: white;
+  margin: auto;
+  font-size: 32px;
+  padding: 12px;
+  border: solid 1px black;
+  margin-right: 30px;
+  width: 100px;
+}
+
+.calculate_button {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #ff9f2b;
+  border-radius: 5px;
+  padding: 15px;
 }
