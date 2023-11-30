@@ -183,4 +183,11 @@ input {
   background-color: #ff9f2b;
   border-radius: 5px;
   padding: 15px;
+  box-shadow: 0 1px 1px gray;
+}
+
+.calculate_button:hover {
+  transition: ease-in 0.2s;
+  scale: 1.03;
+  box-shadow: 0 2px 2px gray;
 }
