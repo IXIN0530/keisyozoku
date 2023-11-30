@@ -50,8 +50,8 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     "英語第二",
     "英語第三",
     "英語第四",
-    "線形代数第一",
-    "線形代数第二",
+    "線形代数第一(2)",
+    "微分積分学第一(2)",
     "力学基礎第一",
     "力学基礎第二",
     "電磁気学基礎第一",
@@ -86,6 +86,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
       setBorderBottom2("none");
       setNowSubject(senSubject);
       setSenOrHi("rgb(183, 214, 255)") //選択科目が選択されている
+
     }
     else {
       setBorderBottom1("none");
