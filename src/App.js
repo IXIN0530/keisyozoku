@@ -34,19 +34,20 @@ function App() {
       <MakeSubject subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
       <div className='List'>
         {subjectAndPointList.length ? (
-          subjectAndPointList.map((item, index) => <ExportPoints
-            index={index}
-            id={item.id}
-            points={item.points}
-            requiredOrElective={item.requiredOrElective}
-            subjectAndPointList={subjectAndPointList}
-            setSubjectAndPointList={setSubjectAndPointList}
-            color={item.color} />
+          subjectAndPointList.map((item, index) =>
+            <ExportPoints
+              index={index}
+              subject={item.subject}
+              score={item.score}
+              backgroundColor={item.backgroundColor}
+              color={item.color}
+              subjectAndPointList={subjectAndPointList}
+              setSubjectAndPointList={setSubjectAndPointList}
+            />
           )) : (
           <p style={{ color: "gray", borderBottom: "1px solid black" }}>まだ点数が保存されていません</p>
         )}
       </div>
-
       <CalculatePoint subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
     </div>
   );

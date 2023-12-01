@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointList, setSubjectAndPointList, color }) => {
+const ExportPoints = ({ subject, score, backgroundColor, index, subjectAndPointList, setSubjectAndPointList, color }) => {
   const deleteSubjectAndPoint = () => {
     //直接stateを変更してはいけない。
     const _subjectAndPointList = [...subjectAndPointList];
@@ -8,7 +8,7 @@ const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointLi
   }
   //点数によって背景色を変更する
   const deleteIfInvalidData = () => {
-    if (points < 0 || points > 100 || color === "black") deleteSubjectAndPoint();
+    if (score < 0 || score > 100 || color === "black") deleteSubjectAndPoint();
   }
   useEffect(() => {
     deleteIfInvalidData();
@@ -16,8 +16,8 @@ const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointLi
   }, []);
   return (
     <div className="sub-and-point">
-      <p className="subject" style={{ backgroundColor: requiredOrElective }}>{id}:</p>
-      <p className="display-point" style={{ backgroundColor: color }}>{points}</p>
+      <p className="subject" style={{ backgroundColor: backgroundColor }}>{subject}:</p>
+      <p className="display-point" style={{ backgroundColor: color }}>{score}</p>
       <button className="delete-button" onClick={deleteSubjectAndPoint}>削除</button>
     </div>
   );

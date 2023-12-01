@@ -73,7 +73,7 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
 
   const [isRequired, setIsRequired] = useState(false);
 
-  const requiredOrElective = isRequired ? "rgb(183, 214, 255)" : "rgb(255, 153, 153)";
+  const backgroundColor = isRequired ? "rgb(183, 214, 255)" : "rgb(255, 153, 153)";
   const nowSubject = isRequired ? requiredSubjects : electiveSubjects;
 
   const createBtnStyle = (isSelected) => {
@@ -83,48 +83,45 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     }
   }
 
-  //参照するときにはtargetという文言が必要
-  const handleClick = (e) => {
-    if (e.target.className === "required-btn") {
-      setIsRequired(true);
-    }
-    else {
-      setIsRequired(false);
-    }
-  }
   //登録ボタンが押された時の処理
-  const [pointValue, setPointValue] = useState("");
-  const [a, setA] = useState("化学実験第一(2)"); //今選択されている科目
+  const [score, setScore] = useState("");
+  const [subject, setSubject] = useState("化学実験第一(2)"); //今選択されている科目
 
   const handleSubjectChange = (e) => {
     console.log(e.target.value);
-    setA(e.target.value);
+    setSubject(e.target.value);
   }
 
-  const handlePointChange = (e) => {
-    setPointValue(e.target.value);
+  const handleScoreChange = (e) => {
+    setScore(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubjectAndPointList([...subjectAndPointList, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: createPointColor(pointValue) }]);//登録されたすべての強化データへ送る。
-    setPointValue("");
+    setSubjectAndPointList([...subjectAndPointList, {
+      isRequired,
+      subject,
+      score,
+      backgroundColor,
+      color: createPointColor(score)
+    }]);//登録されたすべての強化データへ送る。
+    setScore("");
   }
 
-  const createPointColor = (e) => {
-    if (e < 60) {
+  const createPointColor = (score) => {
+    if (score < 60) {
       return "rgb(180, 180, 164)";
     }
-    else if (e < 80) {
+    else if (score < 80) {
       return "white";
     }
-    else if (e < 90) {
+    else if (score < 90) {
       return "rgb(142, 255, 232)";
     }
-    else if (e < 95) {
+    else if (score < 95) {
       return "rgb(115, 230, 136)";
     }
-    else if (e <= 100) {
+    else if (score <= 100) {
       return "rgb(63, 255, 19)";
     }
     else {
@@ -136,14 +133,32 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="required-btn" style={createBtnStyle(isRequired)} onClick={handleClick}>選択</button>
-        <button className="elective-btn" style={createBtnStyle(!isRequired)} onClick={handleClick}>必修</button>
+        <button
+          className="required-btn"
+          style={createBtnStyle(!isRequired)}
+          onClick={() => setIsRequired(false)}
+        >
+          選択
+        </button>
+        <button
+          className="elective-btn"
+          style={createBtnStyle(isRequired)}
+          onClick={() => setIsRequired(true)}
+        >
+          必修
+        </button>
         <select onChange={handleSubjectChange} name="Select">
           {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>
         <form onSubmit={handleSubmit} >
-          <input onChange={handlePointChange} className="point" required value={pointValue} placeholder="入力"></input>
-          <button className="resister-button" >登録</button>
+          <input
+            onChange={handleScoreChange}
+            className="point"
+            required
+            value={score}
+            placeholder="入力"
+          />
+          <button className="resister-button">登録</button>
         </form>
       </div>
     </>
