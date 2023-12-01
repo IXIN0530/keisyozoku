@@ -1,18 +1,18 @@
 import { useState } from "react";
-const CalculatePoint = ({ subAndPoint, setSubAndPoint }) => {
+const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
   const [sumPoint, setSumPoint] = useState(0);
   //降順に並べ替える
   const Calculate = () => {
     setSumPoint(0);
-    let _subAndPoint = [...subAndPoint];
-    let sortedSubAndPoint = _subAndPoint.sort((item1, item2) => (parseInt(item1.points) <= parseInt(item2.points)) ? 1 : -1);
+    let _subjectAndPointList = [...subjectAndPointList];
+    let sortedSubAndPoint = _subjectAndPointList.sort((item1, item2) => (parseInt(item1.points) <= parseInt(item2.points)) ? 1 : -1);
     sortedSubAndPoint = sortedSubAndPoint.sort((item1, item2) => (item1.requiredOrElective >= item2.requiredOrElective) ? 1 : -1);
-    setSubAndPoint(sortedSubAndPoint);
+    setSubjectAndPointList(sortedSubAndPoint);
     //系所属点数の算出
     var sum = 0;
     var requiredCredits = 0;
     var electiveCredits = 0;
-    subAndPoint.map((item, key) => {
+    subjectAndPointList.map((item, key) => {
       //選択科目が選択
       /**
        * 科目当たりの単位数
@@ -39,7 +39,7 @@ const CalculatePoint = ({ subAndPoint, setSubAndPoint }) => {
       }
     });
     console.log(`必修科目は${requiredCredits}単位、選択科目は${electiveCredits}単位取得`);
-    console.log(subAndPoint);
+    console.log(subjectAndPointList);
     setSumPoint(sum);
   }
   return (

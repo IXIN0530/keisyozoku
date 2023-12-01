@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-const ExportPoints = ({ id, points, requiredOrElective, index, subAndPoint, setSubAndPoint, color }) => {
+const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointList, setSubjectAndPointList, color }) => {
   const ItemDelete = () => {
     //直接stateを変更してはいけない。
-    const _subAndPoint = [...subAndPoint];
-    _subAndPoint.splice(index, 1);
-    setSubAndPoint(_subAndPoint);
+    const _subjectAndPointList = [...subjectAndPointList];
+    _subjectAndPointList.splice(index, 1);
+    setSubjectAndPointList(_subjectAndPointList);
   }
   //点数によって背景色を変更する
   const ChangeColor = () => {

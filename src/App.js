@@ -5,7 +5,7 @@ import ExportPoints from './ExportPoints';
 import CalculatePoint from './CalculatePoint';
 
 function App() {
-  const [subAndPoint, setSubAndPoint] = useState([]);
+  const [subjectAndPointList, setSubjectAndPointList] = useState([]);
   //初手だけ読み込み処理をする。
   const didMount = useRef(false);
   useEffect(() => {
@@ -14,12 +14,12 @@ function App() {
       const json = localStorage.getItem("sub_and_point");
       if (json) {
         const array = JSON.parse(json);
-        setSubAndPoint(array);
+        setSubjectAndPointList(array);
       }
     }
     else {
-      if (subAndPoint.length) {
-        const json = JSON.stringify(subAndPoint);
+      if (subjectAndPointList.length) {
+        const json = JSON.stringify(subjectAndPointList);
         localStorage.setItem("sub_and_point", json);
       }
       else {
@@ -27,27 +27,27 @@ function App() {
       }
     }
   }
-    , [subAndPoint])
+    , [subjectAndPointList])
   return (
     <div className="App">
       <h1 className='Title'>系所属点数シュミレータ</h1>
-      <MakeSubject subAndPoint={subAndPoint} setSubAndPoint={setSubAndPoint} />
+      <MakeSubject subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
       <div className='List'>
-        {subAndPoint.length ? (
-          subAndPoint.map((item, index) => <ExportPoints
+        {subjectAndPointList.length ? (
+          subjectAndPointList.map((item, index) => <ExportPoints
             index={index}
             id={item.id}
             points={item.points}
             requiredOrElective={item.requiredOrElective}
-            subAndPoint={subAndPoint}
-            setSubAndPoint={setSubAndPoint}
+            subjectAndPointList={subjectAndPointList}
+            setSubjectAndPointList={setSubjectAndPointList}
             color={item.color} />
           )) : (
           <p style={{ color: "gray", borderBottom: "1px solid black" }}>まだ点数が保存されていません</p>
         )}
       </div>
 
-      <CalculatePoint subAndPoint={subAndPoint} setSubAndPoint={setSubAndPoint} />
+      <CalculatePoint subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
+const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
   /**
    * 選択科目
    */
@@ -113,7 +113,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: pointColor }]);//登録されたすべての強化データへ送る。
+    setSubjectAndPointList([...subjectAndPointList, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: pointColor }]);//登録されたすべての強化データへ送る。
     setPointValue("");
     setPointColor("");
   }
