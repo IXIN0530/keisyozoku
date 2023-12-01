@@ -14,3 +14,6 @@
     const electiveSubjects = [...]
     ```
     のように注釈をつけることで、変数をホバーしたときに確認できるようになります。
+5. boolean値にはis〇〇のように命名
+
+    `isSelected`や`didMount`のように書くことで、boolean値を表していることが分かりやすくなります。

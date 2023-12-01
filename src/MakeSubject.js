@@ -71,6 +71,8 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     "生命科学基礎2Q",
   ];
 
+  const [isRequired, setIsRequired] = useState(false);
+
   const [requiredOrElective, setRequiredOrElective] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
   const [nowSubject, setNowSubject] = useState(electiveSubjects);
   //ボタンのカスタマイズ
