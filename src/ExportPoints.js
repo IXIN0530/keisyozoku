@@ -12,6 +12,7 @@ const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointLi
   }
   useEffect(() => {
     deleteIfInvalidData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="sub-and-point">
