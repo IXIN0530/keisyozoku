@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useCreateForm = (subjectAndPointList, setSubjectAndPointList) => {
+const useCreateForm = (data, setData) => {
   /**
    * 選択科目
    */
@@ -89,7 +89,10 @@ const useCreateForm = (subjectAndPointList, setSubjectAndPointList) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubjectAndPointList([...subjectAndPointList, { isRequired, subject, score }]);
+    const _score = Number(score);
+    if (!isNaN(_score) && _score >= 0 && _score <= 100) {
+      setData([...data, { isRequired, subject, score: _score }]);
+    }
     setScore("");
   }
 

@@ -28,4 +28,4 @@ const useSubjectAndPointList = () => {
   return [subjectAndPointList, setSubjectAndPointList];
 }
 
-export default useSubjectAndPointList
+export default useSubjectAndPointList;

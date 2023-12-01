@@ -1,7 +1,7 @@
 import SubjectTypeSelectBtn from "./SubjectTypeSelectBtn";
 import useCreateForm from "./hooks/useCreateForm";
 
-const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
+const MakeSubject = ({ data, setData }) => {
   const {
     isRequired,
     setIsRequired,
@@ -11,7 +11,7 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     handleSubjectChange,
     handleScoreChange,
     handleSubmit,
-  } = useCreateForm(subjectAndPointList, setSubjectAndPointList);
+  } = useCreateForm(data, setData);
 
   return (
     <>
@@ -30,7 +30,7 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
           text="必修"
         />
         <select onChange={handleSubjectChange} value={subject} name="Select">
-          {nowSubject.map((item, index) => <option key={item} value={item}>{item}</option>)}
+          {nowSubject.map(item => <option key={item} value={item}>{item}</option>)}
         </select>
         <form onSubmit={handleSubmit} >
           <input
@@ -38,6 +38,9 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
             className="point"
             required
             value={score}
+            type="number"
+            max={100}
+            min={0}
             placeholder="入力"
           />
           <button className="resister-button">登録</button>

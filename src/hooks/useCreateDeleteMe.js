@@ -1,9 +1,9 @@
-const useCreateDeleteMe = (subjectAndPointList, setSubjectAndPointList) => {
+const useCreateDeleteMe = (data, setData) => {
   const createDeleteMe = (index) => {
     return () => {
-      const _subjectAndPointList = [...subjectAndPointList];
-      _subjectAndPointList.splice(index, 1);
-      setSubjectAndPointList(_subjectAndPointList);
+      const _data = [...data];
+      _data.splice(index, 1);
+      setData(_data);
     }
   }
 
