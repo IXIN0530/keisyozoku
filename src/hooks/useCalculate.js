@@ -39,7 +39,7 @@ const useCalculate = (data, setData) => {
         }
       }
     });
-    console.log(`必修科目は${requiredCredits}単位、選択科目は${electiveCredits}単位取得`);
+    console.log(`必修科目は${requiredCredits}単位、選択科目は${electiveCredits}単位`);
     console.log(data);
     setSumPoint(sum);
   }
