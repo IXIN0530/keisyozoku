@@ -2,7 +2,7 @@ import { useState } from "react";
 const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
   const [sumPoint, setSumPoint] = useState(0);
   //降順に並べ替える
-  const Calculate = () => {
+  const calculate = () => {
     setSumPoint(0);
     let _subjectAndPointList = [...subjectAndPointList];
     let sortedSubAndPoint = _subjectAndPointList.sort((item1, item2) => (parseInt(item1.points) <= parseInt(item2.points)) ? 1 : -1);
@@ -45,7 +45,7 @@ const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
   return (
     <div className="calculate-point">
       <p className="sum-point">{sumPoint}</p>
-      <button className="calculate-button" onClick={Calculate}>系所属点を計算</button>
+      <button className="calculate-button" onClick={calculate}>系所属点を計算</button>
     </div>
   )
 }
