@@ -38,7 +38,7 @@ function App() {
             index={index}
             id={item.id}
             points={item.points}
-            senorhi={item.senorhi}
+            senOrHi={item.senOrHi}
             subAndPoint={subAndPoint}
             setSubAndPoint={setSubAndPoint}
             color={item.color} />

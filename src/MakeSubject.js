@@ -66,16 +66,16 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     "生命科学基礎1Q",
     "生命科学基礎2Q",
   ];
-  const [senorhi, setSenOrHi] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
+  const [senOrHi, setSenOrHi] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
   const [nowSubject, setNowSubject] = useState(senSubject);
   //ボタンのカスタマイズ
   const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
   const [borderBottom2, setBorderBottom2] = useState("none");
-  const select_style1 = {
+  const selectStyle1 = {
     borderBottom: borderBottom1,
     transition: "ease-in-out 0.3s"
   };
-  const select_style2 = {
+  const selectStyle2 = {
     borderBottom: borderBottom2,
     transition: "ease-in-out 0.3s"
   };
@@ -108,7 +108,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, senorhi: senorhi, color: pointColor }]);//登録されたすべての強化データへ送る。
+    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, senOrHi: senOrHi, color: pointColor }]);//登録されたすべての強化データへ送る。
     setPointValue("");
     setPointColor("");
   }
@@ -138,8 +138,8 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="sen" style={select_style1} onClick={buttonClick}>選択</button>
-        <button className="hi" style={select_style2} onClick={buttonClick}>必修</button>
+        <button className="sen" style={selectStyle1} onClick={buttonClick}>選択</button>
+        <button className="hi" style={selectStyle2} onClick={buttonClick}>必修</button>
         <select onChange={ChangeSelect} name="Select">
           {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>
