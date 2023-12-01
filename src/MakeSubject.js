@@ -73,33 +73,23 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
 
   const [isRequired, setIsRequired] = useState(false);
 
-  const [requiredOrElective, setRequiredOrElective] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
-  const [nowSubject, setNowSubject] = useState(electiveSubjects);
-  //ボタンのカスタマイズ
-  const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
-  const [borderBottom2, setBorderBottom2] = useState("none");
-  const selectStyle1 = {
-    borderBottom: borderBottom1,
-    transition: "ease-in-out 0.3s"
-  };
-  const selectStyle2 = {
-    borderBottom: borderBottom2,
-    transition: "ease-in-out 0.3s"
-  };
+  const requiredOrElective = isRequired ? "rgb(183, 214, 255)" : "rgb(255, 153, 153)";
+  const nowSubject = isRequired ? requiredSubjects : electiveSubjects;
+
+  const createBtnStyle = (isSelected) => {
+    return {
+      borderBottom: isSelected ? "rgb(0, 185, 0)  solid" : "none",
+      transition: "ease-in-out 0.3s"
+    }
+  }
+
   //参照するときにはtargetという文言が必要
   const buttonClick = (e) => {
     if (e.target.className === "required-btn") {
-      setBorderBottom1("rgb(0, 185, 0)  solid");
-      setBorderBottom2("none");
-      setNowSubject(electiveSubjects);
-      setRequiredOrElective("rgb(183, 214, 255)") //選択科目が選択されている
-
+      setIsRequired(true);
     }
     else {
-      setBorderBottom1("none");
-      setBorderBottom2("rgb(0, 185, 0)  solid");
-      setNowSubject(requiredSubjects);
-      setRequiredOrElective("rgb(255, 153, 153)"); //必須科目が選択されている
+      setIsRequired(false);
     }
   }
   //登録ボタンが押された時の処理
@@ -111,42 +101,40 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
   }
   const ResisterClick = (e) => {
     setPointValue(e.target.value);
-    ChangeColor(e.target.value);
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    setSubjectAndPointList([...subjectAndPointList, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: pointColor }]);//登録されたすべての強化データへ送る。
+    setSubjectAndPointList([...subjectAndPointList, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: createPointColor(pointValue) }]);//登録されたすべての強化データへ送る。
     setPointValue("");
-    setPointColor("");
   }
-  const ChangeColor = (e) => {
+
+  const createPointColor = (e) => {
     if (e < 60) {
-      setPointColor("rgb(180, 180, 164)");
+      return "rgb(180, 180, 164)";
     }
     else if (e < 80) {
-      setPointColor("white");
+      return "white";
     }
     else if (e < 90) {
-      setPointColor("rgb(142, 255, 232)");
+      return "rgb(142, 255, 232)";
     }
     else if (e < 95) {
-      setPointColor("rgb(115, 230, 136)");
+      return "rgb(115, 230, 136)";
     }
     else if (e <= 100) {
-      setPointColor("rgb(63, 255, 19)");
+      return "rgb(63, 255, 19)";
     }
     else {
-      setPointColor("black");
+      return "black";
     }
   }
-  //点数の色
-  const [pointColor, setPointColor] = useState("");
+
   return (
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="required-btn" style={selectStyle1} onClick={buttonClick}>選択</button>
-        <button className="elective-btn" style={selectStyle2} onClick={buttonClick}>必修</button>
+        <button className="required-btn" style={createBtnStyle(isRequired)} onClick={buttonClick}>選択</button>
+        <button className="elective-btn" style={createBtnStyle(!isRequired)} onClick={buttonClick}>必修</button>
         <select onChange={ChangeSelect} name="Select">
           {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>
