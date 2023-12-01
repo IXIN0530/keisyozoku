@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useRef, useState } from 'react';
 import MakeSubject from './MakeSubject';
-import ExportPoints from './ExportPoints';
 import CalculatePoint from './CalculatePoint';
+import DisplayScores from './DisplayScores';
 
 function App() {
   const [subjectAndPointList, setSubjectAndPointList] = useState([]);
@@ -31,25 +31,18 @@ function App() {
   return (
     <div className="App">
       <h1 className='Title'>系所属点数シュミレータ</h1>
-      <MakeSubject subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
-      <div className='List'>
-        {subjectAndPointList.length ? (
-          subjectAndPointList.map((item, index) =>
-            <ExportPoints
-              // TOOD: 同じ教科を複数登録させないようにする。
-              key={item.subject + String(index)}
-              index={index}
-              isRequired={item.isRequired}
-              subject={item.subject}
-              score={item.score}
-              subjectAndPointList={subjectAndPointList}
-              setSubjectAndPointList={setSubjectAndPointList}
-            />
-          )) : (
-          <p style={{ color: "gray", borderBottom: "1px solid black" }}>まだ点数が保存されていません</p>
-        )}
-      </div>
-      <CalculatePoint subjectAndPointList={subjectAndPointList} setSubjectAndPointList={setSubjectAndPointList} />
+      <MakeSubject
+        subjectAndPointList={subjectAndPointList}
+        setSubjectAndPointList={setSubjectAndPointList}
+      />
+      <DisplayScores
+        subjectAndPointList={subjectAndPointList}
+        setSubjectAndPointList={setSubjectAndPointList}
+      />
+      <CalculatePoint
+        subjectAndPointList={subjectAndPointList}
+        setSubjectAndPointList={setSubjectAndPointList}
+      />
     </div>
   );
 }

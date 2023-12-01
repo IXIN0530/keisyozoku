@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SubjectTypeSelectBtn from "./SubjectTypeSelectBtn";
 
 const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
   /**
@@ -74,13 +75,6 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
 
   const nowSubject = isRequired ? requiredSubjects : electiveSubjects;
 
-  const createBtnStyle = (isSelected) => {
-    return {
-      borderBottom: isSelected ? "rgb(0, 185, 0)  solid" : "none",
-      transition: "ease-in-out 0.3s"
-    }
-  }
-
   //登録ボタンが押された時の処理
   const [score, setScore] = useState("");
   const [subject, setSubject] = useState("化学実験第一(2)"); //今選択されている科目
@@ -104,20 +98,18 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button
-          className="required-btn"
-          style={createBtnStyle(!isRequired)}
-          onClick={() => setIsRequired(false)}
-        >
-          選択
-        </button>
-        <button
+        <SubjectTypeSelectBtn
           className="elective-btn"
-          style={createBtnStyle(isRequired)}
+          isSelected={!isRequired}
+          onClick={() => setIsRequired(false)}
+          text="選択"
+        />
+        <SubjectTypeSelectBtn
+          className="required-btn"
+          isSelected={isRequired}
           onClick={() => setIsRequired(true)}
-        >
-          必修
-        </button>
+          text="必修"
+        />
         <select onChange={handleSubjectChange} name="Select">
           {nowSubject.map((item, index) => <option key={item} value={item}>{item}</option>)}
         </select>

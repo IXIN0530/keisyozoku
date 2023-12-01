@@ -6,7 +6,7 @@ const ExportPoints = ({ isRequired, subject, score, index, subjectAndPointList, 
     setSubjectAndPointList(_subjectAndPointList);
   }
 
-  const backgroundColor = isRequired ? "rgb(183, 214, 255)" : "rgb(255, 153, 153)";
+  const backgroundColor = isRequired ? "rgb(255, 153, 153)" : "rgb(183, 214, 255)";
   let scoreColor = "black";
 
   if (score < 60) {
