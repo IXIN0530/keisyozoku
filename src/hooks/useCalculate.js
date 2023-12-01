@@ -14,7 +14,7 @@ const useCalculate = (data, setData) => {
     let sum = 0;
     let requiredCredits = 0;
     let electiveCredits = 0;
-    data.forEach((item, key) => {
+    data.forEach(item => {
       /**
        * 科目当たりの単位数
        */
