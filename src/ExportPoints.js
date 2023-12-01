@@ -1,10 +1,5 @@
-const ExportPoints = ({ isRequired, subject, score, index, subjectAndPointList, setSubjectAndPointList }) => {
-  const deleteSubjectAndPoint = () => {
-    //直接stateを変更してはいけない。
-    const _subjectAndPointList = [...subjectAndPointList];
-    _subjectAndPointList.splice(index, 1);
-    setSubjectAndPointList(_subjectAndPointList);
-  }
+const ExportPoints = ({ subjectAndPoint, deleteMe }) => {
+  const { isRequired, subject, score } = subjectAndPoint;
 
   const backgroundColor = isRequired ? "rgb(255, 153, 153)" : "rgb(183, 214, 255)";
   let scoreColor = "black";
@@ -20,14 +15,14 @@ const ExportPoints = ({ isRequired, subject, score, index, subjectAndPointList, 
   } else if (score <= 100) {
     scoreColor = "rgb(63, 255, 19)";
   } else {
-    deleteSubjectAndPoint();
+    deleteMe();
   }
 
   return (
     <div className="sub-and-point">
       <p className="subject" style={{ backgroundColor: backgroundColor }}>{subject}:</p>
       <p className="display-point" style={{ backgroundColor: scoreColor }}>{score}</p>
-      <button className="delete-button" onClick={deleteSubjectAndPoint}>削除</button>
+      <button className="delete-button" onClick={deleteMe}>削除</button>
     </div>
   );
 }
