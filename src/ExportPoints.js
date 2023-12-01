@@ -8,7 +8,7 @@ const ExportPoints = ({ id, points, requiredOrElective, index, subjectAndPointLi
   }
   //点数によって背景色を変更する
   const ChangeColor = () => {
-    if (points < 0 || points > 100 || color == "black") ItemDelete();
+    if (points < 0 || points > 100 || color === "black") ItemDelete();
   }
   useEffect(() => {
     ChangeColor();

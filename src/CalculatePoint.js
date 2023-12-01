@@ -18,7 +18,7 @@ const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
        * 科目当たりの単位数
        */
       var credits = 1;
-      if (item.requiredOrElective == "rgb(183, 214, 255)") {
+      if (item.requiredOrElective === "rgb(183, 214, 255)") {
         //選択科目の場合
         if (item.id.includes("(2)")) {
           credits = 2;
