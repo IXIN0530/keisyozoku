@@ -84,7 +84,7 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
   }
 
   //参照するときにはtargetという文言が必要
-  const buttonClick = (e) => {
+  const handleClick = (e) => {
     if (e.target.className === "required-btn") {
       setIsRequired(true);
     }
@@ -95,14 +95,17 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
   //登録ボタンが押された時の処理
   const [pointValue, setPointValue] = useState("");
   const [a, setA] = useState("化学実験第一(2)"); //今選択されている科目
-  const ChangeSelect = (e) => {
+
+  const handleSubjectChange = (e) => {
     console.log(e.target.value);
     setA(e.target.value);
   }
-  const ResisterClick = (e) => {
+
+  const handlePointChange = (e) => {
     setPointValue(e.target.value);
   }
-  const ResisterForm = (e) => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setSubjectAndPointList([...subjectAndPointList, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: createPointColor(pointValue) }]);//登録されたすべての強化データへ送る。
     setPointValue("");
@@ -133,13 +136,13 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="required-btn" style={createBtnStyle(isRequired)} onClick={buttonClick}>選択</button>
-        <button className="elective-btn" style={createBtnStyle(!isRequired)} onClick={buttonClick}>必修</button>
-        <select onChange={ChangeSelect} name="Select">
+        <button className="required-btn" style={createBtnStyle(isRequired)} onClick={handleClick}>選択</button>
+        <button className="elective-btn" style={createBtnStyle(!isRequired)} onClick={handleClick}>必修</button>
+        <select onChange={handleSubjectChange} name="Select">
           {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>
-        <form onSubmit={ResisterForm} >
-          <input onChange={ResisterClick} className="point" required value={pointValue} placeholder="入力"></input>
+        <form onSubmit={handleSubmit} >
+          <input onChange={handlePointChange} className="point" required value={pointValue} placeholder="入力"></input>
           <button className="resister-button" >登録</button>
         </form>
       </div>

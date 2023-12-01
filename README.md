@@ -17,6 +17,11 @@
 5. boolean値にはis〇〇のように命名
 
     `isSelected`や`didMount`のように書くことで、boolean値を表していることが分かりやすくなります。
+6. Reactの流儀に従う
+
+    HTML要素のonChangeには`handleChange`、onClickには`handleClick`のように名付けた関数を渡すのが通例です。ただし、渡す関数が単にstateを更新するだけではなく、複雑なロジックを持っている場合は、そのロジックを説明する名前にしたほうがわかりやすいでしょう。
+    
+    複数の`handleChange`を区別したいときは、`handlePointChange`、`handleSubjectChange`のようにすると区別できます。
 ## 書き方のルール
 1. stateでは変数の依存関係を正しく反映する
 
