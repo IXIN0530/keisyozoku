@@ -1,14 +1,9 @@
 import React from 'react'
 import ExportPoints from './ExportPoints'
+import useCreateDeleteMe from './hooks/useCreateDeleteMe'
 
 const DisplayScores = ({ subjectAndPointList, setSubjectAndPointList }) => {
-  const createDeleteMe = (index) => {
-    return () => {
-      const _subjectAndPointList = [...subjectAndPointList];
-      _subjectAndPointList.splice(index, 1);
-      setSubjectAndPointList(_subjectAndPointList);
-    }
-  }
+  const createDeleteMe = useCreateDeleteMe(subjectAndPointList, setSubjectAndPointList);
 
   return (
     <div className='List'>

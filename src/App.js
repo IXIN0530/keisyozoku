@@ -1,33 +1,12 @@
 import './App.css';
-import { useEffect, useRef, useState } from 'react';
 import MakeSubject from './MakeSubject';
 import CalculatePoint from './CalculatePoint';
 import DisplayScores from './DisplayScores';
+import useSubjectAndPointList from './hooks/useSubjectAndPointList';
 
 function App() {
-  const [subjectAndPointList, setSubjectAndPointList] = useState([]);
-  //初手だけ読み込み処理をする。
-  const didMount = useRef(false);
-  useEffect(() => {
-    if (!didMount.current) {
-      didMount.current = true;
-      const json = localStorage.getItem("sub_and_point");
-      if (json) {
-        const array = JSON.parse(json);
-        setSubjectAndPointList(array);
-      }
-    }
-    else {
-      if (subjectAndPointList.length) {
-        const json = JSON.stringify(subjectAndPointList);
-        localStorage.setItem("sub_and_point", json);
-      }
-      else {
-        localStorage.removeItem("sub_and_point");
-      }
-    }
-  }
-    , [subjectAndPointList])
+  const [subjectAndPointList, setSubjectAndPointList] = useSubjectAndPointList();
+
   return (
     <div className="App">
       <h1 className='Title'>系所属点数シュミレータ</h1>

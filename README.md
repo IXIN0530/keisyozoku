@@ -65,3 +65,18 @@
 4. 渡すpropsは最小限に
 
     propsを最小限にすることで、パフォーマンスの改善、責務の分離、バグの抑止につながります。
+
+5. UIとロジックと分離
+
+    Reactではロジック(ボタンを押したとき、値を入力したときなどの動作)とUI(どのように見えるか)の定義は、分けて書くことが好まれます。具体的には、`src/hooks/useCalculate.js`を作り、
+    ```js
+    const useCalculate = () => {
+        // CalculatePoint.jsのロジックをすべてここに書く
+        return { sumPoint, handleClick }
+    }
+
+    export default useCalculate;
+    ```
+    のように書くことで、`CalculatePoint.js`のHTML部分がかなり見やすくなり、必要な関数も分かりやすくなっています。当コミットで比べてみてください。
+
+    hooksを使う場合は`src/hooks/`配下にカスタムフックスとして、使わない場合は、`src/functions/`配下に関数を定義することでUIとロジックを分離できます。
