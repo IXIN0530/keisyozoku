@@ -9,15 +9,15 @@ const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
     sortedSubAndPoint = sortedSubAndPoint.sort((item1, item2) => (item1.requiredOrElective >= item2.requiredOrElective) ? 1 : -1);
     setSubjectAndPointList(sortedSubAndPoint);
     //系所属点数の算出
-    var sum = 0;
-    var requiredCredits = 0;
-    var electiveCredits = 0;
+    let sum = 0;
+    let requiredCredits = 0;
+    let electiveCredits = 0;
     subjectAndPointList.forEach((item, key) => {
       //選択科目が選択
       /**
        * 科目当たりの単位数
        */
-      var credits = 1;
+      let credits = 1;
       if (item.requiredOrElective === "rgb(183, 214, 255)") {
         //選択科目の場合
         if (item.id.includes("(2)")) {
