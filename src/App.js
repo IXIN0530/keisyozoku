@@ -36,6 +36,8 @@ function App() {
         {subjectAndPointList.length ? (
           subjectAndPointList.map((item, index) =>
             <ExportPoints
+              // TOOD: 同じ教科を複数登録させないようにする。
+              key={item.subject + String(index)}
               index={index}
               isRequired={item.isRequired}
               subject={item.subject}

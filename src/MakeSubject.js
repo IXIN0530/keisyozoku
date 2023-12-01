@@ -37,7 +37,6 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
     "図学製図",
     "図学デザイン第一(2)",
     "図学デザイン第二(2)",
-    "図学製図",
     "図形科学とCG",
     "宇宙地球科学ラボ(2)",
     "線形代数第二(2)",
@@ -120,7 +119,7 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
           必修
         </button>
         <select onChange={handleSubjectChange} name="Select">
-          {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
+          {nowSubject.map((item, index) => <option key={item} value={item}>{item}</option>)}
         </select>
         <form onSubmit={handleSubmit} >
           <input
