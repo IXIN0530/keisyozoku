@@ -37,10 +37,9 @@ function App() {
           subjectAndPointList.map((item, index) =>
             <ExportPoints
               index={index}
+              isRequired={item.isRequired}
               subject={item.subject}
               score={item.score}
-              backgroundColor={item.backgroundColor}
-              color={item.color}
               subjectAndPointList={subjectAndPointList}
               setSubjectAndPointList={setSubjectAndPointList}
             />

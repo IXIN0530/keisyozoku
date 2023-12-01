@@ -26,3 +26,33 @@
 1. stateでは変数の依存関係を正しく反映する
 
     `MakeSubject.js`において、`borderBottom1`や`nowSubject`などは`isRequired`によって決まる変数なので、それぞれをstateとして定義するべきではありません。stateの更新し忘れや、パフォーマンスの低下につながります。
+2. 責務の範囲に注意
+
+    `MakeSubject.js`では、Formのsubmit時に新しいデータを追加していました。
+    ```js
+    setSubjectAndPointList([...subjectAndPointList, {
+      isRequired,
+      subject,
+      score,
+      backgroundColor,
+      color: createPointColor(score)
+    }]);
+    ```
+    このデータには、`isRequired`、`subject`、`score`、`backgroundColor`、`color`、のように様々な情報が入っていますが、
+    - `ExportPoints.js`では、
+        - `subject`
+        - `score`
+        - `backgroundColor`
+        - `color`
+        
+        のみを、
+    - `Calculate.js`では、
+        - `isRequired`
+        - `subject`
+        - `score`
+        
+        のみを
+    
+    使用しています。つまり、共通して使用しているのは、`subject`と`score`のみです。よって、`isRequired`、`backgroundColor`、`color`は本当に追加すべきでしょうか。実際、`backgroundColor`は`isRequired`に、`color`は`score`に依存しているので、`backgroundColor`と`color`は追加する必要ありません。
+
+    まとめると、**特定の場所でしか用いない**かつ**他の値から計算可能である**ような値は、その場所で扱えばいいので、グローバルなデータに追加しない方がいいです。簡単にいうと**無駄なデータは追加するな**ということです。

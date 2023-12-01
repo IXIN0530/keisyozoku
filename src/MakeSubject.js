@@ -73,7 +73,6 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
 
   const [isRequired, setIsRequired] = useState(false);
 
-  const backgroundColor = isRequired ? "rgb(183, 214, 255)" : "rgb(255, 153, 153)";
   const nowSubject = isRequired ? requiredSubjects : electiveSubjects;
 
   const createBtnStyle = (isSelected) => {
@@ -98,35 +97,8 @@ const MakeSubject = ({ subjectAndPointList, setSubjectAndPointList }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubjectAndPointList([...subjectAndPointList, {
-      isRequired,
-      subject,
-      score,
-      backgroundColor,
-      color: createPointColor(score)
-    }]);//登録されたすべての強化データへ送る。
+    setSubjectAndPointList([...subjectAndPointList, { isRequired, subject, score }]);
     setScore("");
-  }
-
-  const createPointColor = (score) => {
-    if (score < 60) {
-      return "rgb(180, 180, 164)";
-    }
-    else if (score < 80) {
-      return "white";
-    }
-    else if (score < 90) {
-      return "rgb(142, 255, 232)";
-    }
-    else if (score < 95) {
-      return "rgb(115, 230, 136)";
-    }
-    else if (score <= 100) {
-      return "rgb(63, 255, 19)";
-    }
-    else {
-      return "black";
-    }
   }
 
   return (
