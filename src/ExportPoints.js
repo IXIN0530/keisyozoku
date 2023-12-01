@@ -14,10 +14,10 @@ const ExportPoints = ({ id, points, senOrHi, index, subAndPoint, setSubAndPoint,
     ChangeColor();
   }, [])
   return (
-    <div className="subandpoint">
+    <div className="sub-and-point">
       <p className="subject" style={{ backgroundColor: senOrHi }}>{id}:</p>
-      <p className="display_point" style={{ backgroundColor: color }}>{points}</p>
-      <button className="delete_button" onClick={ItemDelete}>削除</button>
+      <p className="display-point" style={{ backgroundColor: color }}>{points}</p>
+      <button className="delete-button" onClick={ItemDelete}>削除</button>
     </div>
 
   );

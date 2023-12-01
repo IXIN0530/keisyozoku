@@ -145,7 +145,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
         </select>
         <form onSubmit={ResisterForm} >
           <input onChange={ResisterClick} className="point" required value={pointValue} placeholder="入力"></input>
-          <button className="resister_button" >登録</button>
+          <button className="resister-button" >登録</button>
         </form>
       </div>
     </>

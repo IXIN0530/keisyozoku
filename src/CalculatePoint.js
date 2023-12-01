@@ -40,9 +40,9 @@ const CalculatePoint = ({ subAndPoint, setSubAndPoint }) => {
     setSumPoint(counter);
   }
   return (
-    <div className="calculate_point">
-      <p className="sum_point">{sumPoint}</p>
-      <button className="calculate_button" onClick={Calculate}>系所属点を計算</button>
+    <div className="calculate-point">
+      <p className="sum-point">{sumPoint}</p>
+      <button className="calculate-button" onClick={Calculate}>系所属点を計算</button>
     </div>
   )
 }
