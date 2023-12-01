@@ -12,7 +12,7 @@ const CalculatePoint = ({ subjectAndPointList, setSubjectAndPointList }) => {
     var sum = 0;
     var requiredCredits = 0;
     var electiveCredits = 0;
-    subjectAndPointList.map((item, key) => {
+    subjectAndPointList.forEach((item, key) => {
       //選択科目が選択
       /**
        * 科目当たりの単位数
