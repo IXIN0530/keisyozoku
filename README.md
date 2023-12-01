@@ -17,3 +17,7 @@
 5. boolean値にはis〇〇のように命名
 
     `isSelected`や`didMount`のように書くことで、boolean値を表していることが分かりやすくなります。
+## 書き方のルール
+1. stateでは変数の依存関係を正しく反映する
+
+    `MakeSubject.js`において、`borderBottom1`や`nowSubject`などは`isRequired`によって決まる変数なので、それぞれをstateとして定義するべきではありません。stateの更新し忘れや、パフォーマンスの低下につながります。
