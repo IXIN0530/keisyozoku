@@ -1,9 +1,10 @@
 import { useState } from "react";
 
 const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
-  //科目データ
-  //選択部分
-  const senSubject = [
+  /**
+   * 選択科目
+   */
+  const electiveSubjects = [
     "化学実験第一(2)",
     "化学実験第二(2)",
     "物理学実験第一",
@@ -45,7 +46,10 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     "微分積分演習第二",
     "グローバル理工人入門(2)",
   ];
-  const hiSubject = [
+  /**
+   * 必修科目
+   */
+  const requiredSubjects = [
     "英語第一",
     "英語第二",
     "英語第三",
@@ -66,8 +70,9 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     "生命科学基礎1Q",
     "生命科学基礎2Q",
   ];
-  const [senOrHi, setSenOrHi] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
-  const [nowSubject, setNowSubject] = useState(senSubject);
+
+  const [requiredOrElective, setRequiredOrElective] = useState("rgb(183, 214, 255)"); //選択か必修かの色付け
+  const [nowSubject, setNowSubject] = useState(electiveSubjects);
   //ボタンのカスタマイズ
   const [borderBottom1, setBorderBottom1] = useState("rgb(0, 185, 0)  solid");
   const [borderBottom2, setBorderBottom2] = useState("none");
@@ -81,18 +86,18 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   };
   //参照するときにはtargetという文言が必要
   const buttonClick = (e) => {
-    if (e.target.className === "sen") {
+    if (e.target.className === "required-btn") {
       setBorderBottom1("rgb(0, 185, 0)  solid");
       setBorderBottom2("none");
-      setNowSubject(senSubject);
-      setSenOrHi("rgb(183, 214, 255)") //選択科目が選択されている
+      setNowSubject(electiveSubjects);
+      setRequiredOrElective("rgb(183, 214, 255)") //選択科目が選択されている
 
     }
     else {
       setBorderBottom1("none");
       setBorderBottom2("rgb(0, 185, 0)  solid");
-      setNowSubject(hiSubject);
-      setSenOrHi("rgb(255, 153, 153)"); //必須科目が選択されている
+      setNowSubject(requiredSubjects);
+      setRequiredOrElective("rgb(255, 153, 153)"); //必須科目が選択されている
     }
   }
   //登録ボタンが押された時の処理
@@ -108,7 +113,7 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
   }
   const ResisterForm = (e) => {
     e.preventDefault();
-    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, senOrHi: senOrHi, color: pointColor }]);//登録されたすべての強化データへ送る。
+    setSubAndPoint([...subAndPoint, { id: a, points: pointValue, requiredOrElective: requiredOrElective, color: pointColor }]);//登録されたすべての強化データへ送る。
     setPointValue("");
     setPointColor("");
   }
@@ -138,8 +143,8 @@ const MakeSubject = ({ subAndPoint, setSubAndPoint }) => {
     <>
       <p>科目選択と点数登録</p>
       <div className="Form">
-        <button className="sen" style={selectStyle1} onClick={buttonClick}>選択</button>
-        <button className="hi" style={selectStyle2} onClick={buttonClick}>必修</button>
+        <button className="required-btn" style={selectStyle1} onClick={buttonClick}>選択</button>
+        <button className="elective-btn" style={selectStyle2} onClick={buttonClick}>必修</button>
         <select onChange={ChangeSelect} name="Select">
           {nowSubject.map((item, index) => <option value={item}>{item}</option>)}
         </select>

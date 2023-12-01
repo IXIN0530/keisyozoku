@@ -6,38 +6,41 @@ const CalculatePoint = ({ subAndPoint, setSubAndPoint }) => {
     setSumPoint(0);
     let _subAndPoint = [...subAndPoint];
     let sortedSubAndPoint = _subAndPoint.sort((item1, item2) => (parseInt(item1.points) <= parseInt(item2.points)) ? 1 : -1);
-    sortedSubAndPoint = sortedSubAndPoint.sort((item1, item2) => (item1.senOrHi >= item2.senOrHi) ? 1 : -1);
+    sortedSubAndPoint = sortedSubAndPoint.sort((item1, item2) => (item1.requiredOrElective >= item2.requiredOrElective) ? 1 : -1);
     setSubAndPoint(sortedSubAndPoint);
     //系所属点数の算出
-    var counter = 0;
-    var hiCounter = 0;
-    var senCounter = 0;
+    var sum = 0;
+    var requiredCredits = 0;
+    var electiveCredits = 0;
     subAndPoint.map((item, key) => {
       //選択科目が選択
-      var tannisuu = 1;
-      if (item.senOrHi == "rgb(183, 214, 255)") {
+      /**
+       * 科目当たりの単位数
+       */
+      var credits = 1;
+      if (item.requiredOrElective == "rgb(183, 214, 255)") {
         //選択科目の場合
         if (item.id.includes("(2)")) {
-          tannisuu = 2;
+          credits = 2;
         }
-        if (senCounter + tannisuu <= 14) {
-          senCounter += tannisuu;
-          counter += parseInt(item.points) * tannisuu;
+        if (electiveCredits + credits <= 14) {
+          electiveCredits += credits;
+          sum += parseInt(item.points) * credits;
         }
       }
       else {
         if (item.id.includes("(2)")) {
-          tannisuu = 2;
+          credits = 2;
         }
-        if (hiCounter + tannisuu <= 17) {
-          hiCounter += tannisuu;
-          counter += parseInt(item.points) * tannisuu;
+        if (requiredCredits + credits <= 17) {
+          requiredCredits += credits;
+          sum += parseInt(item.points) * credits;
         }
       }
     });
-    console.log("hiは", hiCounter, "senは", senCounter);
+    console.log(`必修科目は${requiredCredits}単位、選択科目は${electiveCredits}単位取得`);
     console.log(subAndPoint);
-    setSumPoint(counter);
+    setSumPoint(sum);
   }
   return (
     <div className="calculate-point">

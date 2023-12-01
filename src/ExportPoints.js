@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-const ExportPoints = ({ id, points, senOrHi, index, subAndPoint, setSubAndPoint, color }) => {
+const ExportPoints = ({ id, points, requiredOrElective, index, subAndPoint, setSubAndPoint, color }) => {
   const ItemDelete = () => {
     //直接stateを変更してはいけない。
     const _subAndPoint = [...subAndPoint];
@@ -15,7 +15,7 @@ const ExportPoints = ({ id, points, senOrHi, index, subAndPoint, setSubAndPoint,
   }, [])
   return (
     <div className="sub-and-point">
-      <p className="subject" style={{ backgroundColor: senOrHi }}>{id}:</p>
+      <p className="subject" style={{ backgroundColor: requiredOrElective }}>{id}:</p>
       <p className="display-point" style={{ backgroundColor: color }}>{points}</p>
       <button className="delete-button" onClick={ItemDelete}>削除</button>
     </div>

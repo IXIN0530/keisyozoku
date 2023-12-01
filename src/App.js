@@ -38,7 +38,7 @@ function App() {
             index={index}
             id={item.id}
             points={item.points}
-            senOrHi={item.senOrHi}
+            requiredOrElective={item.requiredOrElective}
             subAndPoint={subAndPoint}
             setSubAndPoint={setSubAndPoint}
             color={item.color} />
