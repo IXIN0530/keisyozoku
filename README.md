@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# コードの一般的なルール
+わざわざコードの書き方にルールを付けるのは、他者や未来の自分が理解しやすくするためです。これにより、変更に強くバグを生みずらくなります。
+## 命名のルール
+1. JavaScriptではcamelCaseで命名
+2. HTML, CSSではkebab-caseで命名
+3. 複数の値を扱う変数には複数形の英単語
+4. 変数、関数などの名前にローマ字はNG
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+    英単語が難しい場合には、
+    ```js
+    /**
+     * 選択科目
+     */
+    const electiveSubjects = [...]
+    ```
+    のように注釈をつけることで、変数をホバーしたときに確認できるようになります。
+5. boolean値にはis〇〇のように命名
 
-## Available Scripts
+    `isSelected`や`didMount`のように書くことで、boolean値を表していることが分かりやすくなります。
+6. Reactの流儀に従う
 
-In the project directory, you can run:
+    HTML要素のonChangeには`handleChange`、onClickには`handleClick`のように名付けた関数を渡すのが通例です。ただし、渡す関数が単にstateを更新するだけではなく、複雑なロジックを持っている場合は、そのロジックを説明する名前にしたほうがわかりやすいでしょう。
+    
+    複数の`handleChange`を区別したいときは、`handlePointChange`、`handleSubjectChange`のようにすると区別できます。
+## 書き方のルール
+1. stateでは変数の依存関係を正しく反映する
 
-### `npm start`
+    `MakeSubject.js`において、`borderBottom1`や`nowSubject`などは`isRequired`によって決まる変数なので、それぞれをstateとして定義するべきではありません。stateの更新し忘れや、パフォーマンスの低下につながります。
+2. 責務の範囲に注意
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    `MakeSubject.js`では、Formのsubmit時に新しいデータを追加していました。
+    ```js
+    setSubjectAndPointList([...subjectAndPointList, {
+      isRequired,
+      subject,
+      score,
+      backgroundColor,
+      color: createPointColor(score)
+    }]);
+    ```
+    このデータには、`isRequired`、`subject`、`score`、`backgroundColor`、`color`、のように様々な情報が入っていますが、
+    - `ExportPoints.js`では、
+        - `subject`
+        - `score`
+        - `backgroundColor`
+        - `color`
+        
+        のみを、
+    - `Calculate.js`では、
+        - `isRequired`
+        - `subject`
+        - `score`
+        
+        のみを
+    
+    使用しています。つまり、共通して使用しているのは、`subject`と`score`のみです。よって、`isRequired`、`backgroundColor`、`color`は本当に追加すべきでしょうか。実際、`backgroundColor`は`isRequired`に、`color`は`score`に依存しているので、`backgroundColor`と`color`は追加する必要ありません。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    まとめると、**特定の場所でしか用いない**かつ**他の値から計算可能である**ような値は、その場所で扱えばいいので、グローバルなデータに追加しない方がいいです。簡単にいうと**無駄なデータは追加するな**ということです。
+3. コンポーネントの分割
 
-### `npm test`
+    これも2の責務の分割に関係しますが、コンポーネントは機能単位で分割しましょう。コンポーネント内で定義した関数や変数が一部でしか使われていないのであれば、その部分だけを分割することで、パフォーマンスの改善やバグの抑止、再利用可能性の向上につながります。
+    > ただし、個人開発や少人数開発の場合は、そのグループ内で納得できる範囲で分割すればいいと思います。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    あくまで、開発効率を向上させるためなので、明らかに便利になる範囲内で積極的に分割しましょう。
+4. 渡すpropsは最小限に
 
-### `npm run build`
+    propsを最小限にすることで、パフォーマンスの改善、責務の分離、バグの抑止につながります。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. UIとロジックと分離
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    Reactではロジック(ボタンを押したとき、値を入力したときなどの動作)とUI(どのように見えるか)の定義は、分けて書くことが好まれます。具体的には、`src/hooks/useCalculate.js`を作り、
+    ```js
+    const useCalculate = () => {
+        // CalculatePoint.jsのロジックをすべてここに書く
+        return { sumPoint, handleClick }
+    }
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    export default useCalculate;
+    ```
+    のように書くことで、`CalculatePoint.js`のHTML部分がかなり見やすくなり、必要な関数も分かりやすくなっています。当コミットで比べてみてください。
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    hooksを使う場合は`src/hooks/`配下にカスタムフックスとして、使わない場合は、`src/functions/`配下に関数を定義することでUIとロジックを分離できます。
